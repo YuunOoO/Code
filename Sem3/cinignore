@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+#include <limits>
+using namespace std;
+
+struct helper{
+	float y;
+	bool exist;
+};
+
+int main()
+{
+	
+	float x;
+	float b;
+	helper tab[3];
+	for(int i=0;i<3;i++)
+	{
+	cin >>x;
+		if(cin.fail())
+		{
+			tab[i].exist = false;
+			tab[i].y = 0;
+			cin.clear();
+		}
+		else
+		{
+			tab[i].exist = true;
+			tab[i].y = x;
+		}	
+		cout << endl;
+		cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+	}
+
+	for(int i=0; i<3; i++)
+	{
+		cout<<"Liczba "<<i+1<<" to: ";
+		cout<<tab[i].y<<" Blad? ";
+		if(tab[i].exist) cout <<"0";
+		else cout <<"1";
+		cout<<endl;
+	}
+		
+	
+}
