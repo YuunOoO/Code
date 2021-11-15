@@ -1,17 +1,75 @@
 #include <iostream>
 #include <string>
 #include <stdio.h>
+#include <cmath>
 using namespace std;
 
 
-void reverse(int* tab)
+string convert(int digit, string low, string mid, string high)
 {
-	///
+
+    if (digit == 1)
+    {
+        return low;
+    }
+    if (digit == 2)
+    {
+        return low + low;
+    }
+    if (digit == 3)
+    {
+        return low + low + low;
+    }
+    if (digit == 4)
+    {
+        return low + mid;
+    }
+    if (digit == 5)
+    {
+        return mid;
+    }
+    if (digit == 6)
+    {
+        return mid + low;
+    }
+    if (digit == 7)
+    {
+        return mid + low + low;
+    }
+    if (digit == 8)
+    {
+        return mid + low + low + low;
+    }
+    if (digit == 9)
+    {
+        return low + high;
+    }
+    if (digit == 0)
+    {
+        return "";
+    }
+}
+
+void reverse(int arab)
+{	
+		string answers[4];
+	 	int thous = arab / 1000;
+        int hund = arab % 1000 / 100;
+        int tens = arab % 100 / 10;
+        int ones = arab % 10 / 1;
+        
+		answers[0] = convert(thous, "M", "M", "M");
+        answers[1] = convert(hund, "C", "D", "M");
+        answers[2] = convert(tens, "X", "L", "C");
+        answers[3] = convert(ones, "I", "V", "X");
+        cout << answers[0] << answers[1] << answers[2];
+        cout << answers[3] << endl;
 }
 
 int var(char v)
 {
 	if(v == 'M' || v =='m') return 1000;
+	if(v == 'D' || v =='D') return 500;
 	if(v == 'C' || v =='c') return 100;
 	if(v == 'L' || v =='l') return 50;
 	if(v == 'X' || v =='x') return 10;
@@ -55,15 +113,16 @@ int main()
 	string liczba1, liczba2;
 	//while( getchar() != '\n') 
 //	{	
+		for(int i=0; i<3;i++)
+		{
 			cin>>liczba1;
 			cin>>liczba2;
 			dodaj(liczba1,liczba2,tab,counter);
-		
-		counter++;
+			counter++;
+		}
 //	}
 	for(int i=0; i<counter;i++)
-		cout<<tab[i]<<endl;
-	//	reverse(tab[i]);
+			reverse(tab[i]);
 	
 	return 0;
 }
