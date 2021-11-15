@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+#include <stdio.h>
+using namespace std;
+
+
+void reverse(int* tab)
+{
+	///
+}
+
+int var(char v)
+{
+	if(v == 'M' || v =='m') return 1000;
+	if(v == 'C' || v =='c') return 100;
+	if(v == 'L' || v =='l') return 50;
+	if(v == 'X' || v =='x') return 10;
+	if(v == 'V' || v =='v') return 5;
+	if(v == 'I' || v =='i') return 1;
+}
+
+int zamien(string liczba)
+{
+	int leng = liczba.length();
+	int sum = 0;
+	for(int i=0; i<leng; i++)
+	{
+		if(i == leng)
+		{
+			sum += var(liczba[i]);
+			break;
+		}
+		int prev,next;
+		prev = var(liczba[i]);
+		next = var(liczba[i+1]);
+		if(next>prev) sum-=prev;
+		else sum+=prev;
+	}
+	return sum;
+}
+
+void dodaj(string l1, string l2, int* tab, int counter)
+{
+	int x = zamien(l1);
+	int y = zamien(l2);
+	tab[counter]= x+y;
+}
+
+
+int main()
+{
+	int counter = 0;
+	int tab[100];
+	for(int i=0;i<100;i++)	tab[i] = 0;
+	string liczba1, liczba2;
+	//while( getchar() != '\n') 
+//	{	
+			cin>>liczba1;
+			cin>>liczba2;
+			dodaj(liczba1,liczba2,tab,counter);
+		
+		counter++;
+//	}
+	for(int i=0; i<counter;i++)
+		cout<<tab[i]<<endl;
+	//	reverse(tab[i]);
+	
+	return 0;
+}
