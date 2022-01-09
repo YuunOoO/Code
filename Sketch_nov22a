@@ -1,0 +1,27 @@
+
+#include <SoftwareSerial.h>
+#define Pin1  2
+
+SoftwareSerial BTSerial (A0,A1);
+char caracter;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  BTSerial.begin(9600);
+  pinMode(Pin1, OUTPUT);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+if(BTSerial.available()) {
+  //Serial.write("ok");
+  caracter = BTSerial.read();
+  
+    if(caracter == 'a'){ digitalWrite(2, HIGH); Serial.write('a');}
+    if(caracter == 'b'){ digitalWrite(2, LOW);Serial.write('b');} 
+//delay(1000);
+}
+}

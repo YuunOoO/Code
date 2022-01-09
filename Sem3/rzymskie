@@ -1,0 +1,128 @@
+#include <iostream>
+#include <string>
+#include <stdio.h>
+#include <cmath>
+using namespace std;
+
+
+string convert(int digit, string low, string mid, string high)
+{
+
+    if (digit == 1)
+    {
+        return low;
+    }
+    if (digit == 2)
+    {
+        return low + low;
+    }
+    if (digit == 3)
+    {
+        return low + low + low;
+    }
+    if (digit == 4)
+    {
+        return low + mid;
+    }
+    if (digit == 5)
+    {
+        return mid;
+    }
+    if (digit == 6)
+    {
+        return mid + low;
+    }
+    if (digit == 7)
+    {
+        return mid + low + low;
+    }
+    if (digit == 8)
+    {
+        return mid + low + low + low;
+    }
+    if (digit == 9)
+    {
+        return low + high;
+    }
+    if (digit == 0)
+    {
+        return "";
+    }
+}
+
+void reverse(int arab)
+{	
+		string answers[4];
+	 	int thous = arab / 1000;
+        int hund = arab % 1000 / 100;
+        int tens = arab % 100 / 10;
+        int ones = arab % 10 / 1;
+        
+		answers[0] = convert(thous, "M", "M", "M");
+        answers[1] = convert(hund, "C", "D", "M");
+        answers[2] = convert(tens, "X", "L", "C");
+        answers[3] = convert(ones, "I", "V", "X");
+        cout << answers[0] << answers[1] << answers[2];
+        cout << answers[3] << endl;
+}
+
+int var(char v)
+{
+	if(v == 'M' || v =='m') return 1000;
+	if(v == 'D' || v =='D') return 500;
+	if(v == 'C' || v =='c') return 100;
+	if(v == 'L' || v =='l') return 50;
+	if(v == 'X' || v =='x') return 10;
+	if(v == 'V' || v =='v') return 5;
+	if(v == 'I' || v =='i') return 1;
+}
+
+int zamien(string liczba)
+{
+	int leng = liczba.length();
+	int sum = 0;
+	for(int i=0; i<leng; i++)
+	{
+		if(i == leng)
+		{
+			sum += var(liczba[i]);
+			break;
+		}
+		int prev,next;
+		prev = var(liczba[i]);
+		next = var(liczba[i+1]);
+		if(next>prev) sum-=prev;
+		else sum+=prev;
+	}
+	return sum;
+}
+
+void dodaj(string l1, string l2, int* tab, int counter)
+{
+	int x = zamien(l1);
+	int y = zamien(l2);
+	tab[counter]= x+y;
+}
+
+
+int main()
+{
+	int counter = 0;
+	int tab[100];
+	for(int i=0;i<100;i++)	tab[i] = 0;
+	string liczba1, liczba2;
+	//while( getchar() != '\n') 
+//	{	
+		for(int i=0; i<3;i++)
+		{
+			cin>>liczba1;
+			cin>>liczba2;
+			dodaj(liczba1,liczba2,tab,counter);
+			counter++;
+		}
+//	}
+	for(int i=0; i<counter;i++)
+			reverse(tab[i]);
+	
+	return 0;
+}

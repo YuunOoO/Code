@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+	int narzut = 10;  // mozna zmienic
+    int * tablica = new int [narzut];
+	int  rozmiar = 0;
+    int tmp = narzut;
+    cout << "Podawaj liczby, 0 konczy wczytywanie.\n";
+   	int * nowa = new int[ narzut ];
+   	for(int i=0;i<narzut;i++) nowa[i]=0, tablica[i]=0;
+    while( true )
+    {
+        int liczba;
+        cin >> liczba;
+        if( liczba == 0 )
+             break;
+        // Brakuje miejsca, utwórz większą tablicę
+        if(rozmiar == tmp )
+        {
+            int * nowa = new int[ rozmiar + narzut ];	
+            tmp+=narzut;
+             // Skopiuj dane
+        for( int i = 0; i < rozmiar; ++i )
+             nowa[ i ] = tablica[ i ];
+             // Usuń starą tablicę
+        delete[] tablica;
+        // Zakutalizuj zmienne
+        tablica = nowa;
+		}
+        // Dodaj nową wartość
+        tablica[ rozmiar ] = liczba;
+        rozmiar++;
+    }
+   	cout << "Te same liczby, ale odwrotnie!\n";
+    for( int i = rozmiar - 1; i >= 0; --i )
+         cout << tablica[ i ] << ' ';
+    delete[] tablica;
+}

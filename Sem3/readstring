@@ -1,0 +1,18 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	string wyraz;
+	string calosc = "";
+	for(int i=0;i<10;i++)
+	{
+		cin>>wyraz;
+		calosc += wyraz;
+		if(i!=9) calosc +=", ";
+	}
+	cout << calosc;
+	
+	return 0;
+}
